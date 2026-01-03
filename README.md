@@ -106,7 +106,7 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout private.key -out cer
 
 ```
 
-**paste** the certificate and private key in nginx folder under "cert", now we can see the config
+**paste** the certificate and private key in **nginx** folder under "**cert**", now we can see the config
 
 ```nginx
 
