@@ -78,13 +78,13 @@ When giving name for **upstream** give it with **hypen** instead of **underscore
 
 ```nginx
 
-  upstream **backend-servers** {
+  upstream backend-servers {
         server localhost:4200 weight=1;
         server localhost:4201 weight=1;
     }
 
   location / {
-            proxy_pass http://**backend-servers**;
+            proxy_pass http://backend-servers;
             proxy_set_header Upgrade $http_upgrade;
             proxy_set_header Connection 'upgrade';
             proxy_set_header Host $host;
@@ -99,7 +99,12 @@ When we are requesting a site using Https, we are using this we have to give cer
 install the openssl for windows
 
 **openssl command for create certificate**
+
+```cmd
+
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout private.key -out certificate.crt
+
+```
 
 **paste** the certificate and private key in nginx folder under "cert", now we can see the config
 
