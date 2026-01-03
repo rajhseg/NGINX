@@ -1,12 +1,16 @@
 # NGINX
 This repo is for NGINX tutorial
 <br />
-Always run the nginx command from nginx folder
-
+Always run the **nginx** **command** from **nginx** **folder**
+<br />
 nginx -v
+<br />
 start nginx
+<br />
 nginx -s reload
+<br />
 nginx -s stop
+<br />
 
 NGINX is a webserver acts as ReverseProxy doing functionality like 
 1. Routing
@@ -15,7 +19,13 @@ NGINX is a webserver acts as ReverseProxy doing functionality like
 4. Config OAuth2 Proxy etc
 
 <br />
-we can see the error log by enabling the following lines.
+we can see the **error** **log** by enabling the following lines.
+
+<br />
+
+error_log  logs/error.log;
+error_log  logs/error.log  notice;
+error_log  logs/error.log  info;
 
 <br />
 
@@ -78,6 +88,7 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout private.key -out cer
        ssl_certificate_key  ../cert/private.key;
 
 **Full Config for HTTPS**
+<br />
 
  server {
        listen       443 ssl;
