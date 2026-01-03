@@ -3,14 +3,13 @@ This repo is for NGINX tutorial
 <br />
 Always run the **nginx** **command** from **nginx** **folder**
 <br />
+
+```nginx
 nginx -v
-<br />
 start nginx
-<br />
 nginx -s reload
-<br />
 nginx -s stop
-<br />
+```
 
 NGINX is a webserver acts as ReverseProxy doing functionality like 
 1. Routing
@@ -19,7 +18,7 @@ NGINX is a webserver acts as ReverseProxy doing functionality like
 4. Config OAuth2 Proxy etc
 
 <br />
-we can see the **errorlog** by enabling the following lines.
+we can see the errorlog by enabling the following lines.
 
 <br />
 
@@ -35,8 +34,11 @@ error_log  logs/error.log  info;
 Here we will see some sample configuration of how it will work.
 <br />
 
+```nginx
         listen       80;
         server_name  localhost;
+
+```
 <br />
 
 From the above config you can see the nginx is listening in 80 port in localhost, so user will request the localhost:80
@@ -48,6 +50,7 @@ Routing
 When we are requesting a server with url, based on url Nginx redirects the request to corresponding backend server. To do that we are using **proxy_pass** directive inside **location**
 <br />
 
+```nginx
         location / {
             proxy_pass http://localhost:4200/;
             proxy_set_header Upgrade $http_upgrade;
@@ -55,12 +58,25 @@ When we are requesting a server with url, based on url Nginx redirects the reque
             proxy_set_header Host $host;
             proxy_cache_bypass $http_upgrade;
         }
+
+        location /react {
+            proxy_pass http://localhost:4202/;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection 'upgrade';
+            proxy_set_header Host $host;
+            proxy_cache_bypass $http_upgrade;
+        }
+        
+```
+
 <br />
 
 LoadBalancer
 ------------------
 When we have 2 or more backend servers and we want to redirect to the different servers based on load, then we can use the load balance feature. To do that we are using **upstream**.
 When giving name for **upstream** give it with **hypen** instead of **underscore**.
+
+```nginx
 
   upstream **backend-servers** {
         server localhost:4200 weight=1;
@@ -75,6 +91,8 @@ When giving name for **upstream** give it with **hypen** instead of **underscore
             proxy_cache_bypass $http_upgrade;
         }
 
+```
+
 SSL
 -------------------
 When we are requesting a site using Https, we are using this we have to give certificate and private key in config, we can use the **openssl** tool to create certificate for testing.
@@ -85,11 +103,17 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout private.key -out cer
 
 **paste** the certificate and private key in nginx folder under "cert", now we can see the config
 
+```nginx
+
        ssl_certificate      ../cert/certificate.crt;
        ssl_certificate_key  ../cert/private.key;
 
+```
+
 **Full Config for HTTPS**
 <br />
+
+```nginx
 
  server {
        listen       443 ssl;
@@ -123,11 +147,15 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout private.key -out cer
         
     }
 
+```
+
 <br />
 
 **Full Config for Http**
 
 <br />
+
+```nginx
 
 server {
        listen       80;
@@ -150,3 +178,5 @@ server {
         }
         
   }
+
+```
