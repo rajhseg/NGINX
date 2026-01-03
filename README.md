@@ -19,14 +19,15 @@ NGINX is a webserver acts as ReverseProxy doing functionality like
 4. Config OAuth2 Proxy etc
 
 <br />
-we can see the **error** **log** by enabling the following lines.
+we can see the **errorlog** by enabling the following lines.
 
 <br />
 
+```nginx
 error_log  logs/error.log;
 error_log  logs/error.log  notice;
 error_log  logs/error.log  info;
-
+```
 <br />
 
 <br/>
