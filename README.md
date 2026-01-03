@@ -121,30 +121,12 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout private.key -out cer
 ```nginx
 
 
-http {
-    include       mime.types;
-    default_type  application/octet-stream;
-
-    #log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
-    #                  '$status $body_bytes_sent "$http_referer" '
-    #                  '"$http_user_agent" "$http_x_forwarded_for"';
-
-    #access_log  logs/access.log  main;
-
-    sendfile        on;
-    #tcp_nopush     on;
-
-    #keepalive_timeout  0;
-    keepalive_timeout  65;
-
-    #gzip  on;
-
     upstream backend-servers {
         server localhost:4200 weight=1;
         server localhost:4201 weight=1;
     }
 
- server {
+    server {
        listen       443 ssl;
        server_name  localhost;
 
@@ -176,8 +158,6 @@ http {
         
     }
 
-}
-
 ```
 
 <br />
@@ -187,25 +167,6 @@ http {
 <br />
 
 ```nginx
-
-
-http {
-    include       mime.types;
-    default_type  application/octet-stream;
-
-    #log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
-    #                  '$status $body_bytes_sent "$http_referer" '
-    #                  '"$http_user_agent" "$http_x_forwarded_for"';
-
-    #access_log  logs/access.log  main;
-
-    sendfile        on;
-    #tcp_nopush     on;
-
-    #keepalive_timeout  0;
-    keepalive_timeout  65;
-
-    #gzip  on;
 
     upstream backend-servers {
         server localhost:4200 weight=1;
@@ -234,6 +195,5 @@ http {
         
   }
 
-}
 
 ```
