@@ -133,12 +133,6 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout private.key -out cer
        ssl_certificate      ../cert/certificate.crt;
        ssl_certificate_key  ../cert/private.key;
 
-       ssl_session_cache    shared:SSL:1m;
-       ssl_session_timeout  5m;
-
-       ssl_ciphers  HIGH:!aNULL:!MD5;
-       ssl_prefer_server_ciphers  on;
-
        
         location / {
             proxy_pass http://backend-servers;
